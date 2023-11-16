@@ -30,9 +30,9 @@
             <label class="col-md-2 text-center">Hình ảnh</label>
             <div class="col-md-9">
                 <div class="custom-file">
-                    <input type="file" name="hinh" class="custom-file-input" id="validatedCustomFile" required>
+                    <input type="file" name="hinh" class="custom-file-input" id="validatedCustomFile">
                     <label class="custom-file-label" for="validatedCustomFile"></label>
-                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                    <!-- <div class="invalid-feedback">Example invalid custom file feedback</div> -->
                 </div>
             </div>
         </div>
@@ -46,6 +46,7 @@
     <div class="border-top text-center">
         <div class="card-body">
             <input type="submit" name="themmoi" class="btn btn-primary" value="Thêm mới">
+            <a href="index.php?act=listsp"><input type="button" class="btn btn-success" value="Danh sách sản phẩm"></a>
             <input type="reset" class="btn btn-danger" value="Nhập lại">
         </div>
     </div>

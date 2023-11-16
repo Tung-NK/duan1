@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title m-b-0">Static Table With Checkboxes</h5>
+        <h5 class="card-title m-b-0">Danh sách sản phẩm</h5>
     </div>
     <div class="table-responsive">
         <table class="table">

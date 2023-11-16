@@ -8,7 +8,32 @@ if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
         case 'listdm':
+            $listdanhmuc = loadall_danhmuc();
             include 'danhmuc/listdm.php';
+            break;
+
+        case 'adddm':
+            if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
+                $tenloai = $_POST['tenloai'];
+                insert_danhmuc($tenloai);
+                $thongbao = "Thêm thành công";
+            }
+            include 'danhmuc/adddm.php';
+            break;
+
+        case 'xoadm':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_danhmuc($_GET['id']);
+            }
+            $listdanhmuc = loadall_danhmuc();
+            include 'danhmuc/listdm.php';
+            break;
+
+        case 'suadm';
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $dm = loadone_danhmuc($_GET['id']);
+            }
+            include 'danhmuc/updatedm.php';
             break;
 
         case 'listsp':
