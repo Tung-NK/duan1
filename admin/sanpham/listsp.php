@@ -3,6 +3,11 @@
         <h5 class="card-title m-b-0">Danh sách sản phẩm</h5>
     </div>
     <div class="table-responsive">
+    <div class="border-top">
+        <div class="card-body">
+            <a href="index.php?act=addsp"><input type="button" class="btn btn-success" value="Thêm sản phẩm"></a>
+        </div>
+    </div>
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -54,10 +59,5 @@
             }
             ?>
         </table>
-    </div>
-    <div class="border-top">
-        <div class="card-body">
-            <a href="index.php?act=addsp"><input type="button" class="btn btn-success" value="Thêm sản phẩm"></a>
-        </div>
     </div>
 </div>

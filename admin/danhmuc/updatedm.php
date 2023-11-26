@@ -15,14 +15,14 @@
         </div>
 
         <div class="border-top text-center">
-        <div class="card-body">
-        <input type="hidden" name="id" value="<?php if(isset($id)&&($id>0)) echo $id;?>">
-            <input type="submit" name="capnhat" class="btn btn-primary" value="Cập nhật">
-            <input type="reset" class="btn btn-danger" value="Nhập lại">
+            <div class="card-body">
+                <input type="hidden" name="id" value="<?php if (isset($id) && ($id > 0)) echo $id; ?>">
+                <input type="submit" name="capnhat" class="btn btn-primary" value="Cập nhật">
+                <input type="reset" class="btn btn-danger" value="Nhập lại">
+            </div>
         </div>
-    </div>
-    <?php
-    if (isset($thongbao) && ($thongbao != ""))
-        echo $thongbao;
-    ?>
+        <?php
+        if (isset($thongbao) && ($thongbao != ""))
+            echo $thongbao;
+        ?>
 </form>

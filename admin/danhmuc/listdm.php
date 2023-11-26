@@ -1,4 +1,11 @@
 <div class="card">
+<div class="border-top">
+        <div class="card-body">
+            <a href="index.php?act=adddm">
+                <input type="submit" class="btn btn-success" value="Thêm danh mục">
+            </a>
+        </div>
+    </div>
     <div class="card-body">
         <h5 class="card-title m-b-0">Danh sách danh mục</h5>
     </div>
@@ -42,12 +49,5 @@
                 ?>
             </tbody>
         </table>
-    </div>
-    <div class="border-top">
-        <div class="card-body">
-            <a href="index.php?act=adddm">
-                <input type="submit" class="btn btn-success" value="Thêm danh mục">
-            </a>
-        </div>
     </div>
 </div>

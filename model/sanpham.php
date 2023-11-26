@@ -11,16 +11,38 @@ function delete_sanpham($id)
     pdo_execute($sql);
 }
 
-function loadall_sanpham_home()
+// function loadall_sanpham_home()
+// {
+//     $sql = "select * from sanpham where 1 order by id asc limit 2,9";
+//     $listsanpham = pdo_query($sql);
+//     return $listsanpham;
+// }
+
+function load_sanpham_pricemin()
 {
-    $sql = "select * from sanpham where 1 order by id asc limit 2,9";
+    $sql = "SELECT * FROM `sanpham` ORDER BY `price` ASC, RAND() LIMIT 10";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }
 
-function loadall_sanpham_top10()
+function load_sanpham_new()
 {
-    $sql = "select * from sanpham where 1 order by luotxem asc limit 0,10";
+    $sql = "SELECT * FROM sanpham ORDER BY id DESC";
+    $listsanpham = pdo_query($sql);
+    return $listsanpham;
+}
+
+
+function load_sanpham_featured()
+{
+    $sql = "SELECT * FROM sanpham ORDER BY RAND()";
+    $listsanpham = pdo_query($sql);
+    return $listsanpham;
+}
+
+function load_sanpham_dmfeatured()
+{
+    $sql = "SELECT * FROM sanpham WHERE iddm = 1";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }

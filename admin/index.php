@@ -3,6 +3,9 @@ include '../model/pdo.php';
 include 'header.php';
 include '../model/danhmuc.php';
 include '../model/sanpham.php';
+include '../model/taikhoan.php';
+include '../model/binhluan.php';
+include '../global.php';
 
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
@@ -44,7 +47,7 @@ if (isset($_GET['act'])) {
                 $kyw = '';
                 $iddm = 0;
             }
-            $listdanhmuc = loadall_danhmuc();
+            $listdanhmuc = loadall_danhmuc($iddm);
             $listsanpham = loadall_sanpham($kyw, $iddm);
             include 'sanpham/listsp.php';
             break;
@@ -107,6 +110,42 @@ if (isset($_GET['act'])) {
             }
             $listsanpham = loadall_sanpham("", 0);
             include 'sanpham/listsp.php';
+            break;
+
+            //tài khoản
+        case 'list':
+            $listtk = load_taikhoan();
+            include 'taikhoan/list.php';
+            break;
+
+        case 'suatk':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $taikhoan = loadone_taikhoan($_GET['id']);
+            }
+            include 'taikhoan/updatetk.php';
+            break;
+
+        case 'updatetk':
+            if (isset($_POST['capnhattk']) && ($_POST['capnhattk'])) {
+                $id = $_POST['id'];
+                $user = $_POST['user'];
+                $pass = $_POST['pass'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $role = $_POST['role'];
+                update_taikhoan_admin($id, $user, $pass, $email, $phone, $role);
+                $thongbao = "Cập nhật thành công";
+            }
+            $listtk = load_taikhoan("", 0);
+            include 'taikhoan/list.php';
+            break;
+
+        case 'xoatk':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_taikhoan($_GET['id']);
+            }
+            $listtk = load_taikhoan("", 0);
+            include 'taikhoan/list.php';
             break;
 
         default:
