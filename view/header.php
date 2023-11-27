@@ -203,6 +203,7 @@
                                                     <ul>
                                                         <li><a href="index.php?act=thoat">Logout</a></li>
                                                         <li><a href="index.php?act=edit_tk">My Account</a></li>
+                                                        <li><a href="index.php?act=mybill">Đơn hàng của tôi</a></li>
                                                     </ul>
                                                 </li>
                                                 <li>

@@ -2,32 +2,47 @@
     <h3 class="mb-3">Orders</h3>
     <div class="table-responsive">
         <table class="table">
+            <?php
+            if (isset($listbill) && (is_array($listbill))) {
+                extract($listbill);
+            }
+            ?>
             <thead>
                 <tr>
-                    <th>Tổng</th>
-                    <!-- <th>Tên sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                    <th>Tổng tiền</th>
                     <th>Người đặt hàng</th>
                     <th>Địa chỉ</th>
-                    <th>Trạng thái</th> -->
+                    <th>Email</th>
+                    <th>SĐT</th>
+                    <th>Tổng tiền</th>
+                    <th>Phương thức thanh toán</th>
+                    <th>Ngày đặt hàng</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <?php
-                        foreach ($hoadon as $hd) {
-                            extract($hd);
-                            echo '<td>'.$tong.'</td>
-                            <!-- <td>sep 10, 2018</td>
-                            <td>Processing</td>
-                            <td>$25.00 for 1 item </td>
-                            <td></td> -->';
-                        }
-                    ?>
+                    <td><?= $listbill['bill_name'] ?></td>
+                    <td><?= $listbill['bill_diachi'] ?></td>
+                    <td><?= $listbill['bill_email'] ?></td>
+                    <td><?= $listbill['bill_phone'] ?></td>
+                    <td><?= $listbill['total'] ?></td>
+                    <td>
+                        <?php
+                        $pttt = $listbill['bill_pttt'];
+                        $ptthanhtoan = ($pttt == 1) ? 'Thanh toán khi nhận hàng' : (($pttt == 2) ? 'Thanh toán bằng thẻ' :
+                                'Thanh toán');
+                        echo $ptthanhtoan;
+                        ?>
+                    </td>
+                    <td><?= $listbill['ngaydathang'] ?></td>
                 </tr>
             </tbody>
+        </table>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <?php
+            chi_tiet_bill($bill);
+            ?>
         </table>
     </div>
 </div>

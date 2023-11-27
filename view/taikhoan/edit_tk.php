@@ -70,31 +70,36 @@
                          <div id="orders" class="tab-pane fade">
                              <h3>Orders</h3>
                              <div class="table-responsive">
+
                                  <table class="table">
                                      <thead>
                                          <tr>
-                                             <th>Order</th>
-                                             <th>Date</th>
-                                             <th>Status</th>
-                                             <th>Total</th>
+                                             <th>Mã đơn hàng</th>
+                                             <th>Ngày đặt hàng</th>
+                                             <th>Trạng thái</th>
+                                             <th>Tổng</th>
                                              <th>Actions</th>
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         <tr>
-                                             <td>1</td>
-                                             <td>sep 10, 2018</td>
-                                             <td>Processing</td>
-                                             <td>$25.00 for 1 item </td>
-                                             <td><a class="view" href="cart.html">view</a></td>
-                                         </tr>
-                                         <tr>
-                                             <td>2</td>
-                                             <td>sep 10, 2018</td>
-                                             <td>Processing</td>
-                                             <td>$17.00 for 1 item </td>
-                                             <td><a class="view" href="cart.html">view</a></td>
-                                         </tr>
+
+                                        <?php
+                                            if(is_array($bill_list)){
+                                                foreach ($bill_list as $bill) {
+                                                    extract($bill);
+                                                    $ttdh = get_ttdh($bill['bill_trangthai']);
+                                                    $countsp =loadall_cart_count($bill['id']);
+                                                    echo '<tr>
+                                                    <td>TVY-'.$bill['id'].'</td>
+                                                    <td>'.$bill['ngaydathang'].'</td>
+                                                    <td>'.$ttdh.'</td>
+                                                    <td>'.$bill['total'].'</td>
+                                                    <td>'.$countsp.'</td>
+                                                </tr>';
+                                                }
+                                            }
+                                        ?>
+                                         
                                      </tbody>
                                  </table>
                              </div>

@@ -5,6 +5,7 @@ include '../model/danhmuc.php';
 include '../model/sanpham.php';
 include '../model/taikhoan.php';
 include '../model/binhluan.php';
+include '../model/cart.php';
 include '../global.php';
 
 if (isset($_GET['act'])) {
@@ -147,6 +148,23 @@ if (isset($_GET['act'])) {
             $listtk = load_taikhoan("", 0);
             include 'taikhoan/list.php';
             break;
+
+            //dơn hàng
+        case 'listdh':
+            $bill_list = loadall_bill(0);
+            include 'donhang/listdh.php';
+            break;
+
+            
+
+        // case 'xoadh':
+        //     if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+        //         delete_bill($_GET['id']);
+        //     }
+        //     $listdh = loadall_bill("",0);
+        //     include 'donhang/listdh.php';
+        //     break;
+
 
         default:
             include 'home.php';

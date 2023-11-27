@@ -22,15 +22,39 @@ if (!isset($_SESSION['mycart'])) $_SESSION['mycart'] = [];
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
+        case 'mybill':
+            $bill_list = loadall_bill($_SESSION['user']['id']);
+            include 'view/cart/donhang.php';
+            break;
+
         case 'thanhtoan':
             include 'view/cart/thanhtoan.php';
             break;
 
         case 'bill':
             if(isset($_POST['bill'])&&($_POST['bill'])){
-                $tong = $_POST['tong'];
-                $hoadon = hoadon($tong);
+                if(isset($_SESSION['user'])) $iduser = $_SESSION['user']['id'];
+                else $id=0;
+                $name = $_POST['user'];
+                $email = $_POST['email'];
+                $diachi = $_POST['diachi'];
+                $phone = $_POST['phone'];
+                $pttt = $_POST['pttt'];
+                $ngaydathang = date("Y-m-d H:i:s");
+                $tongdonhang = tongdonhang();
+
+                $idbill = insert_bill($iduser,$name, $email, $diachi,$phone,$pttt,$ngaydathang,$tongdonhang);
+
+                foreach ($_SESSION['mycart'] as $cart) {
+                    insert_cart($_SESSION['user']['id'],$cart['0'],$cart['1'],$cart['2'],$cart['3'],$cart['4'],$cart['5'],$idbill);
+                    
+                }
+
+                $_SESSION['cart']=[];
             }
+            $listbill =  loadone_bill($idbill);
+            $bill =  loadall_cart($idbill);
+
             include 'view/cart/bill.php';
             break;
 

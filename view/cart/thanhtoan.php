@@ -112,19 +112,19 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="checkout-form-list mtb-30">
-                                    <input type="text" placeholder="Số nhà, ngõ, ngách. (tuỳ chọn)" />
+                                    <input name="diachi" value="<?= $diachi ?>"type="text" placeholder="Số nhà, ngõ, ngách. (tuỳ chọn)" />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="checkout-form-list mb-30">
                                     <label>Tỉnh/ Thành Phố<span class="required">*</span></label>
-                                    <input type="text" placeholder="Town / City" />
+                                    <input name="diachi" value="<?= $diachi ?>"type="text" placeholder="Town / City" />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="checkout-form-list mb-30">
                                     <label>Quận / Huyện <span class="required">*</span></label>
-                                    <input type="text" placeholder="Quận / Huyện" />
+                                    <input name="diachi" value="<?= $diachi ?>"type="text" placeholder="Quận / Huyện" />
                                 </div>
                             </div>
 
@@ -294,7 +294,7 @@
                             </tr>
                             <tr class="order-total">
                                 <th>Order Total</th>
-                                <td><span name="tong" class=" total amount">' . $tong . '</span>
+                                <td><span class=" total amount">' . $tong . '</span>
                                 </td>
                             </tr>
                         </tfoot>';
@@ -304,51 +304,22 @@
                         </div>
                         <div class="payment-method">
                             <div id="accordion">
-                                <div class="card">
-                                    <div class="card-header" id="headingone">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Direct Bank Transfer
-                                            </button>
-                                        </h5>
-                                    </div>
-
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingone" data-parent="#accordion">
-                                        <div class="card-body">
-                                            <p>Make your payment directly into our bank account. Please use your Order ID as
-                                                the payment reference. Your order won’t be shipped until the funds have
-                                                cleared in our account.</p>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list create-acc mb-30">
+                                        <input value="1" name="pttt" id="cbox" type="radio" checked/>
+                                        <label>Thanh toán khi nhận hàng</label>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingtwo">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Cheque Payment
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingtwo" data-parent="#accordion">
-                                        <div class="card-body">
-                                            <p>Please send your cheque to Store Name, Store Street, Store Town, Store State
-                                                / County, Store Postcode.</p>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list create-acc mb-30">
+                                        <input value="2" name="pttt" id="cbox" type="radio" />
+                                        <label>Thanh toán bằng thẻ</label>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingthree">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                PayPal
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingthree" data-parent="#accordion">
-                                        <div class="card-body">
-                                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
-                                                account.</p>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list create-acc mb-30">
+                                        <input value="3" name="pttt" id="cbox" type="radio" />
+                                        <label>Thanh toán</label>
                                     </div>
                                 </div>
                                 <div class="login-details text-center mb-25">

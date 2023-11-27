@@ -225,6 +225,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php?act=list" aria-expanded="false"><i class="fas fa-user-circle"></i><span class="hide-menu">Khách hàng</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Bình luận</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Đơn hàng</span></a></li>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Bình luận </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Form Basic </span></a></li>
@@ -334,6 +335,17 @@
                                 <div class="box bg-success text-center">
                                     <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
                                     <h6 class="text-white">Thống kê</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xlg-3">
+                        <a href="index.php?act=listdh">
+                            <div class="card card-hover">
+                                <div class="box bg-success text-center">
+                                    <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                                    <h6 class="text-white">Đơn hàng</h6>
                                 </div>
                             </div>
                         </a>
