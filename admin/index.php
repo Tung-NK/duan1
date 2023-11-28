@@ -155,15 +155,32 @@ if (isset($_GET['act'])) {
             include 'donhang/listdh.php';
             break;
 
-            
+        case 'suadh':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $donhang = loadone_bill($_GET['id']);
+            }
+            include 'donhang/updatedh.php';
+            break;
 
-        // case 'xoadh':
-        //     if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-        //         delete_bill($_GET['id']);
-        //     }
-        //     $listdh = loadall_bill("",0);
-        //     include 'donhang/listdh.php';
-        //     break;
+        case 'updatedh':
+            if (isset($_POST['capnhatdh']) && ($_POST['capnhatdh'])) {
+                $id = $_POST['id'];
+                $bill_trangthai = $_POST['bill_trangthai'];
+                update_donhang($id, $bill_trangthai);
+                $thongbao = "Cập nhật thành công";
+            }
+            $bill_list = loadall_bill(0);
+            include 'donhang/listdh.php';
+            break;
+
+        case 'xoadh':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $id = $_GET['id'];
+                delete_bill($id);
+            }
+            $bill_list = loadall_bill(0);
+            include 'donhang/listdh.php';
+            break;
 
 
         default:

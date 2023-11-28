@@ -132,3 +132,16 @@ function delete_bill($id)
     $sql = "delete from bill where id=" . $id;
     pdo_execute($sql);
 }
+
+function load_trangthai()
+{
+    $sql = "SELECT DISTINCT bill_trangthai FROM bill";
+    $trangthai_bill = pdo_query($sql);
+    return $trangthai_bill;
+}
+
+function update_donhang($id, $bill_trangthai)
+{
+    $sql = "update bill set bill_trangthai= '" . $bill_trangthai . "' where id=" . $id;
+    pdo_execute($sql);
+}
