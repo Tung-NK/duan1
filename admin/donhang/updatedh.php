@@ -104,12 +104,19 @@ if (is_array($donhang)) {
             $ct = loadall_cart($_GET['id']);
             if (is_array($ct)) {
                 foreach ($ct as $item) {
-                    global $img_path;
-                    $hinh = $img_path . $item['image'];
-                    
+                    // global $img_path;
+                    // $hinh = $img_path . $item['image'];
+
+                    $hinhpath = "../upload/" . $item['image'];
+                    if (is_file($hinhpath)) {
+                        $hinh = "<img src='" . $hinhpath . "' height='100'>";
+                    } else {
+                        $hinh = "Không có hình ảnh";
+                    }
+
                     echo '<tr>
                                         <td>' . $item['idpro'] . '</td>
-                                        <td><img src="' . $hinh . '" style="width: 100px;"></td>
+                                        <td><img src="' . $hinh . '"></td>
                                         <td>' . $item['name'] . '</td>
                                         <td>' . $item['price'] . '</td>
                                         <td>' . $item['soluong'] . '</td> 
@@ -132,4 +139,3 @@ if (is_array($donhang)) {
         echo $thongbao;
     ?>
 </form>
-

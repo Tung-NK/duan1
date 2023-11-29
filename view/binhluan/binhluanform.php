@@ -17,64 +17,48 @@ $dsbl = load_binhluan($idpro);
 </head>
 
 <body>
-    <div class="group-title">
-        <h2>customer review</h2>
-    </div>
-    <?php
-    foreach ($dsbl as $bl) {
-        extract($bl);
-        echo '<h4 class="review-mini-title">' . $user . '</h4>
-            <ul class="review-list">
-                <li>
-                    <span>Người bình luận</span>
-                    <label>Review by
-                        <a href="#">' . $user . '</a>
-                    </label>
-                </li>
-                <li>
-                    <span>Nội dung</span>
-                    <label>Review by
-                        ' . $noidung . '
-                    </label>
-                </li>
-                <li>
-                    <span>Ngày bình luận</span>
-                    <label>' . date("d-m-Y", strtotime($ngaybinhluan)) . '</label>
-                </li>
-                <!-- Single Review List End -->
-            </ul>';
-    }
-    ?>
-    </div>
+    <div class="row">
+        <div class="boxcontent2 binhluan">
+            <table>
+                <tr>
+                    <td><strong>Nội dung</strong></td>
+                    <td><strong>Người bình luận</strong></td>
+                    <td><strong>Ngày bình luận</strong></td>
+                </tr>
+                <?php
+                foreach ($dsbl as $bl) {
+                    extract($bl);
+                    echo '
+                                    <tr>
+                                                <td>' . $noidung . '</td>
+                                                <td>' . $user . '</td>
+                                                <td>' . date("d-m-Y", strtotime($ngaybinhluan)) . '</td>
+                                            </tr>';
+                }
+                ?>
 
-    <!-- Reviews End -->
-    <!-- Reviews Start -->
-    <div class="review mt-10">
-        <!-- Reviews Field Start -->
-        <div class="riview-field mt-40">
-            <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
-                    <input type="hidden" name="idpro" value="<?= $idpro ?>"><div class="form-group">
-                    <label class="req" for="comments">Nội dung</label>
-                    <textarea name="noidung" class="form-control" rows="5" id="comments" required="required"></textarea>
-                </div>
-                <input type="submit" name="guibinhluan" value="Gửi bình luận" class="customer-btn"></input>
+            </table>
+        </div>
+        <div class="boxfooter binhluanform">
+            <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
+                <input type="hidden" name="idpro" value="<?= $idpro ?>">
+                <input type="text" name="noidung" class="form-control">
+                <input type="submit" name="guibinhluan" value="Gửi bình luận">
             </form>
         </div>
         <?php
-       if(isset($_POST['guibinhluan']) && ($_POST['guibinhluan'])){
-        $noidung = $_POST['noidung'];
-        $idpro = $_POST['idpro'];
-        // Thiết lập ID người dùng hiện tại từ phiên
-        $iduser = $_SESSION['user']['id'];
-        // Thiết lập ngày hiện tại
-        $ngaybinhluan = date("Y-m-d H:i:s"); // Hoặc sử dụng định dạng ngày thời gian mong muốn của bạn
-    
-        insert_binhluan($noidung, $iduser, $idpro, $ngaybinhluan);
-        header("location: ".$_SERVER['HTTP_REFERER']);
-    }
+        if (isset($_POST['guibinhluan']) && ($_POST['guibinhluan'])) {
+            $noidung =  $_POST['noidung'];
+            $idpro =  $_POST['idpro'];
+            $iduser = $_SESSION['user']['id'];
+            // $ngaybinhluan = date("d-m-Y", strtotime($ngaybinhluan));
+            insert_binhluan($noidung, $iduser, $idpro, date("Y-m-d H:i:s"));
+            header("location: " . $_SERVER['HTTP_REFERER']);
+        }
 
         ?>
-        <!-- Reviews Field Start -->
+    </div>
+
 </body>
 
 </html>

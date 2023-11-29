@@ -32,9 +32,9 @@ if (isset($_GET['act'])) {
             break;
 
         case 'bill':
-            if(isset($_POST['bill'])&&($_POST['bill'])){
-                if(isset($_SESSION['user'])) $iduser = $_SESSION['user']['id'];
-                else $id=0;
+            if (isset($_POST['bill']) && ($_POST['bill'])) {
+                if (isset($_SESSION['user'])) $iduser = $_SESSION['user']['id'];
+                else $id = 0;
                 $name = $_POST['user'];
                 $email = $_POST['email'];
                 $diachi = $_POST['diachi'];
@@ -43,14 +43,13 @@ if (isset($_GET['act'])) {
                 $ngaydathang = date("Y-m-d H:i:s");
                 $tongdonhang = tongdonhang();
 
-                $idbill = insert_bill($iduser,$name, $email, $diachi,$phone,$pttt,$ngaydathang,$tongdonhang);
+                $idbill = insert_bill($iduser, $name, $email, $diachi, $phone, $pttt, $ngaydathang, $tongdonhang);
 
                 foreach ($_SESSION['mycart'] as $cart) {
-                    insert_cart($_SESSION['user']['id'],$cart['0'],$cart['1'],$cart['2'],$cart['3'],$cart['4'],$cart['5'],$idbill);
-                    
+                    insert_cart($_SESSION['user']['id'], $cart['0'], $cart['1'], $cart['2'], $cart['3'], $cart['4'], $cart['5'], $idbill);
                 }
 
-                $_SESSION['cart']=[];
+                $_SESSION['cart'] = [];
             }
             $listbill =  loadone_bill($idbill);
             $bill =  loadall_cart($idbill);
@@ -167,6 +166,7 @@ if (isset($_GET['act'])) {
             if (isset($_GET['idsp']) && ($_GET['idsp'] > 0)) {
                 $id = $_GET['idsp'];
                 $onesp = loadone_sanpham($id);
+                // $dsbl = load_binhluan($idpro);
                 extract($onesp);
                 $sp_cung_loai = load_sanpham_cungloai($id, $iddm);
                 include 'view/sanphamct.php';
@@ -174,7 +174,7 @@ if (isset($_GET['act'])) {
                 include 'view/home.php';
             }
             break;
-
+            
         default:
             include 'view/home.php';
             break;

@@ -6,6 +6,7 @@ include '../model/sanpham.php';
 include '../model/taikhoan.php';
 include '../model/binhluan.php';
 include '../model/cart.php';
+include '../model/thongke.php';
 include '../global.php';
 
 if (isset($_GET['act'])) {
@@ -174,12 +175,32 @@ if (isset($_GET['act'])) {
             include 'donhang/listdh.php';
             break;
 
-        //thong kê
-        case 'thongke':
-            include 'thongke/thongke.php';
+            // bình luận    
+        case 'binhluan':
+            $listbinhluan = list_binhluan();
+            include 'binhluan/listbl.php';
             break;
 
-            
+        case 'xoabl':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_binhluan($_GET['id']);
+            }
+            $listbinhluan = list_binhluan();
+            include 'binhluan/listbl.php';
+            break;
+
+            //thong kê
+            case 'thongke':
+                $listthongke=loadall_thongke();
+                include 'thongke/listtk.php';
+                break;
+
+            case 'bieudo':
+                $listthongke=loadall_thongke();
+                include 'thongke/thongke.php';
+                break;  
+
+
         default:
             include 'home.php';
             break;

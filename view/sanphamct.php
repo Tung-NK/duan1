@@ -1,3 +1,61 @@
+<style>
+    .row {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .boxfooter {
+        width: 100%;
+        display: flex;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .boxfooter form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .boxfooter input[type="text"],
+    .boxfooter input[type="submit"] {
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: calc(100% - 22px);
+    }
+
+    .boxfooter input[type="submit"] {
+        flex: 10;
+        background-color: #303030;
+        color: white;
+        cursor: pointer;
+    }
+
+    .boxfooter input[type="submit"]:hover {
+        background-color:  #0438A1;
+        color: white;
+    }
+
+    .boxcontent2 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+    }
+
+    .binhluan table td {
+        flex: 10;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <div class="breadcrumb-area">
     <div class="container">
         <ol class="breadcrumb breadcrumb-list">
@@ -120,7 +178,7 @@
 </div>
 <!-- Product Thumbnail End -->
 <!-- Product Thumbnail Description Start -->
-<div class="thumnail-desc  pb-80">
+<div class="thumnail-desc  pb-30">
     <div class="container">
         <div class="thumb-desc-inner">
             <div class="row">
@@ -129,9 +187,9 @@
                         <li>
                             <a class="active" data-toggle="tab" href="#dtail">Mô tả sản phẩm</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a data-toggle="tab" href="#review">Bình luận</a>
-                        </li>
+                        </li> -->
                     </ul>
                     <!-- Product Thumbnail Tab Content Start -->
                     <div class="tab-content thumb-content">
@@ -142,29 +200,40 @@
                         </div>';
                         ?>
                     </div>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-                    <script>
-                        $(document).ready(function() {
-                            $("#review").load("view/binhluan/binhluanform.php", {
-                                idpro: <?= $id ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="thumnail-desc  pb-30">
+    <div class="container">
+        <div class="thumb-desc-inner">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="tab-content thumb-content">
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                $("#binhluan").load("view/binhluan/binhluanform.php", {
+                                    idpro: <?= $id ?>
+                                });
+
                             });
+                        </script>
 
-                        });
-                    </script>
-                    <div id="review" class="tab-pane fade">
-                        <!-- Reviews Start -->
-                        <div class="review">
-                            <form action="index.php?act=sanphamct" method="post">
-                                <input type="hidden" name="idpro" value="<?= $idpro ?>">
-                                <div class="form-group">
-                                    <label class="req" for="comments">Nội dung</label>
-                                    <textarea name="noidung" class="form-control" rows="5" id="comments" required="required"></textarea>
-                                </div>
-                                <input type="submit" name="guibinhluan" value="Gửi bình luận" class="customer-btn"></input>
-                            </form>
+                        <div class="row" id="binhluan">
+
+                            <div class="boxfooter box_search formtaikhoan">
+                                <form action="index.php?act=sanphamct" method="post">
+                                    <input type="hidden" name="idpro" value="<?= $id ?>">
+                                    <input type="text" name="noidung">
+                                    <input type="submit" name="guibinhluan" value="Gửi bình luận">
+                                </form>
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
