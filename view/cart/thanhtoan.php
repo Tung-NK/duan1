@@ -104,40 +104,24 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-12 mb-30">
                                 <div class="checkout-form-list">
                                     <label>Địa chỉ <span class="required">*</span></label>
                                     <input name="diachi" value="<?= $diachi ?>" type="text" placeholder="Tên đường" />
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list mtb-30">
-                                    <input name="diachi" value="<?= $diachi ?>"type="text" placeholder="Số nhà, ngõ, ngách. (tuỳ chọn)" />
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Tỉnh/ Thành Phố<span class="required">*</span></label>
-                                    <input name="diachi" value="<?= $diachi ?>"type="text" placeholder="Town / City" />
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Quận / Huyện <span class="required">*</span></label>
-                                    <input name="diachi" value="<?= $diachi ?>"type="text" placeholder="Quận / Huyện" />
-                                </div>
-                            </div>
+                            
 
                             <div class="col-md-12">
                                 <div class="checkout-form-list mb-30">
                                     <label>Email<span class="required">*</span></label>
-                                    <input name="email" value="<?= $email ?>" type="email" placeholder="" />
+                                    <input name="email" value="<?= $email ?>" type="email" placeholder="Email" />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="checkout-form-list mb-30">
                                     <label>Phone <span class="required">*</span></label>
-                                    <input name="phone" value="<?= $phone ?>" type="text" placeholder="Postcode / Zip" />
+                                    <input name="phone" value="<?= $phone ?>" type="text" placeholder="Phone" />
                                 </div>
                             </div>
 

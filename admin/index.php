@@ -158,6 +158,7 @@ if (isset($_GET['act'])) {
         case 'suadh':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $donhang = loadone_bill($_GET['id']);
+                // loadall_cart($idbill);
             }
             include 'donhang/updatedh.php';
             break;
@@ -173,16 +174,12 @@ if (isset($_GET['act'])) {
             include 'donhang/listdh.php';
             break;
 
-        case 'xoadh':
-            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-                $id = $_GET['id'];
-                delete_bill($id);
-            }
-            $bill_list = loadall_bill(0);
-            include 'donhang/listdh.php';
+        //thong kê
+        case 'thongke':
+            include 'thongke/thongke.php';
             break;
 
-
+            
         default:
             include 'home.php';
             break;

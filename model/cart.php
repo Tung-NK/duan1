@@ -93,6 +93,15 @@ function loadall_cart_count($idbill)
     return sizeof($bill);
 }
 
+// function loadall_cart_product($idbill)
+// {
+//     $sql = "select * from cart where idbill=" . $idbill;
+//     $bill = pdo_query($sql);
+//     return $bill;
+// }
+
+
+
 function loadall_bill($iduser)
 {
     $sql = "select * from bill where 1";
@@ -124,13 +133,6 @@ function get_ttdh($n)
             break;
     }
     return $tt;
-}
-
-
-function delete_bill($id)
-{
-    $sql = "delete from bill where id=" . $id;
-    pdo_execute($sql);
 }
 
 function load_trangthai()

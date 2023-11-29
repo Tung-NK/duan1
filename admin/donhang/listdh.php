@@ -21,7 +21,6 @@
                             foreach ($bill_list as $bill) {
                                 extract($bill);
                                 $suadh = "index.php?act=suadh&id=".$id;
-                                $xoadh = "index.php?act=xoadh&id=".$id;
                                 $kh = $bill["bill_name"] . '
                                     <br> ' . $bill["bill_email"] . '
                                     <br> ' . $bill["bill_diachi"] . '
@@ -43,7 +42,7 @@
                                     
                                     <td>
                                         <a href="' . $suadh . '"><input type="button" class="btn btn-primary" value="Sửa"></a>
-                                        <a href="' . $xoadh . '"><input type="button" class="btn btn-primary" value="Xoá"></a>
+            
                                     </td>
                                     
                                 </tr>';
