@@ -1,4 +1,4 @@
-        <div class="breadcrumb-area">
+<div class="breadcrumb-area">
             <div class="container">
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item">
@@ -48,7 +48,7 @@
                                                 </td>
                                                 <td class="product-name"><a href="' . $linksp . '">' . $cart[2] . '</a></td>
                                                 <td class="product-price"><span class="amount">' . $price_number . '</span></td>
-                                                <td class="product-quantity"><input type="number" value="' . $cart[4] . '" /></td>
+                                                <td class="product-quantity"><span min="1" value="" />' . $cart[4] . '</span></td>
                                                 <td class="product-subtotal">' . $ttien . '</td>
                                                 <td class="product-remove"> <a href="' . $xoasp . '"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                             </tr>
@@ -75,7 +75,7 @@
                                         <h2>Cart Totals</h2>
                                         <br />
                                         <?php
-                                        extract($cart);
+                                        // extract($cart);
                                         echo '<table class="float-md-right">
                                     <tbody>
                                         <tr class="cart-subtotal">
@@ -102,4 +102,4 @@
                 </div>
                 <!-- Row End -->
             </div>
-        </div>
+        </div> 

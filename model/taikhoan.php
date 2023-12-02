@@ -4,9 +4,9 @@
         pdo_execute($sql);
     }
 
-    function check_user($user,$pass)
+    function check_user($email,$pass)
 {
-    $sql = "select * from acount where user='".$user."' AND  pass='".$pass."'";
+    $sql = "select * from acount where email='".$email."' AND  pass='".$pass."'";
     $sp = pdo_query_one($sql);
     return $sp;
 }

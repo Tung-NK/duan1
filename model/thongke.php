@@ -1,9 +1,22 @@
 <?php
     function loadall_thongke(){
-        $sql = "select danhmuc.id as madm, danhmuc.name as tendm, count(sanpham.id) as countsp, min(sanpham.price) as minprice, max(sanpham.price) as maxprice, avg(sanpham.price) as avgprice";
-        $sql.= " from sanpham left join danhmuc on danhmuc.id=sanpham.iddm";
-        $sql.= " group by danhmuc.id order by danhmuc.id desc";
+        $sql = "SELECT danhmuc.id AS madm, danhmuc.name AS tendm, MAX(sanpham.price) AS maxprice, MIN(sanpham.price) AS minprice,";
+        $sql .= " sanpham.id AS masp, sanpham.name AS tensp, COUNT(cart.id) AS soluong";
+        $sql .= " FROM sanpham LEFT JOIN danhmuc ON danhmuc.id = sanpham.iddm";
+        $sql .= " LEFT JOIN cart ON sanpham.id = cart.idpro";
+        $sql .= " GROUP BY danhmuc.id ORDER BY danhmuc.id DESC";
+    
         $result = pdo_query($sql);
         return $result;
     }
+
+    function getLowestSoldProduct() {
+        $sql = "SELECT sanpham.id AS masp, sanpham.name AS tensp, COUNT(cart.id) AS soluong";
+        $sql .= " FROM sanpham LEFT JOIN cart ON sanpham.id = cart.idpro";
+        $sql .= " GROUP BY sanpham.id ORDER BY soluong ASC LIMIT 1";
+    
+        $result = pdo_query($sql);
+        return $result;
+    }
+
 ?>

@@ -1,3 +1,8 @@
+<?php
+    if(is_array($dm)){
+        extract($dm);
+    }
+?>
 <form action="index.php?act=updatedm" method="post" class="form-horizontal" enctype="multipart/form-data">
     <div class="card-body">
         <h4 class="card-title">Personal Info</h4>
@@ -10,7 +15,7 @@
         <div class="form-group row">
             <label for="fname" class="col-sm-2 text-center control-label col-form-label">Tên danh mục</label>
             <div class="col-sm-9">
-                <input type="text" name="tenloai" class="form-control" id="fname" placeholder="Tên danh mục">
+                <input type="text" name="name" class="form-control" id="fname" placeholder="Tên danh mục" value="<?= $name;?>">
             </div>
         </div>
 

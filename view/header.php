@@ -104,10 +104,29 @@
                         <div class="col-md-3 col order-2 order-md-3 mb-sm-30">
                             <div class="cart-box float-md-right">
                                 <a href="index.php?act=viewcart">
-                                    <span class="total-pro">2 item <br><span>$160.00</span></span>
+                                    <?php
+                                    if (isset($_SESSION['mycart']) && !empty($_SESSION['mycart'])) {
+                                        $soLuongSanPham = count($_SESSION['mycart']);
+                                        $tong = 0;
+
+                                        foreach ($_SESSION['mycart'] as $cart) {
+                                            $ttien = $cart[3] * $cart[4];
+                                            $tong += $ttien;
+                                        }
+                                    ?>
+                                        <span class="total-pro"><?php echo $soLuongSanPham; ?> item<br>
+                                            <span><?php echo "$". $tong; ?></span>
+                                        </span>
+                                    <?php } else { ?>
+                                        <span class="total-pro">0 item<br>
+                                            <span>0</span>
+                                        </span>
+                                    <?php } ?>
                                 </a>
                             </div>
                         </div>
+
+
 
 
                         <!-- Cart Box End Here -->
@@ -199,11 +218,16 @@
                                             <!-- Currency & Language Selection Start -->
                                             <ul class="dropdown cart-box-width currency-selector">
                                                 <li>
-                                                    <h3>Xin chào <?=$user?></h3>
+                                                    <h3>Xin chào <?= $user ?></h3>
                                                     <ul>
                                                         <li><a href="index.php?act=thoat">Logout</a></li>
                                                         <li><a href="index.php?act=edit_tk">My Account</a></li>
                                                         <li><a href="index.php?act=mybill">Đơn hàng của tôi</a></li>
+                                                        <?php if ($role == 1) { ?>
+                                                            <li>
+                                                                <a href="admin/index.php">Vào trang quản trị</a>
+                                                            </li>
+                                                        <?php } ?>
                                                     </ul>
                                                 </li>
                                                 <li>

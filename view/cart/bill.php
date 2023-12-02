@@ -29,7 +29,7 @@
                         <?php
                         $pttt = $listbill['bill_pttt'];
                         $ptthanhtoan = ($pttt == 1) ? 'Thanh toán khi nhận hàng' : (($pttt == 2) ? 'Thanh toán bằng thẻ' :
-                                'Thanh toán');
+                            'Thanh toán');
                         echo $ptthanhtoan;
                         ?>
                     </td>
@@ -44,5 +44,9 @@
             chi_tiet_bill($bill);
             ?>
         </table>
+    </div>
+    <div class="login-details text-center mb-25" style="white-space: nowrap; overflow: hidden;">
+        <a href="index.php?act=mybill">
+        <input type="submit" name="mybill" class="login-btn" value="Đồng ý đặt hàng"></input></a>
     </div>
 </div>

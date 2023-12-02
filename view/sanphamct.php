@@ -159,9 +159,10 @@
                             </li>
                             <li>
                             <form action="index.php?act=addtocart" method="post">
+                            <input type="hidden" name="id" value="' . $id . '">
                             <input type="hidden" name="name" value="' . $name . '">
                             <input type="hidden" name="image" value="' . $image . '">
-                            <input type="hidden" name="price" value="' . $price . '">
+                            <input type="hidden" name="price" value="' . $onesp['price'] . '">
                             <a><input type="submit" name="addtocart" value="Thêm vào giỏ hàng"></a>
                         </form>
                             </li>

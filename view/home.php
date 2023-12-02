@@ -347,7 +347,7 @@
                                 </div>
                                 <div class="pro-add-cart">
                                 <form action="index.php?act=addtocart" method="post">
-                                    <input type="hidden" name="id" value="' . $sp['id'] . '">
+                                    <input type="hidden" name="id" value="' . $id. '">
                                     <input type="hidden" name="name" value="' . $name . '">
                                     <input type="hidden" name="image" value="' . $image . '">
                                     <input type="hidden" name="price" value="' . $sp['price'] . '">
@@ -402,8 +402,8 @@
                                         <span class="quantity-pro">(200+)</span>
                                     </div>
                                 </div>
+                                <div class="pro-add-cart">
                                 <form action="index.php?act=addtocart" method="post">
-                                    <div class="pro-add-cart">
                                     <input type="hidden" name="id" value="' . $id . '">
                                     <input type="hidden" name="name" value="' . $name . '">
                                     <input type="hidden" name="image" value="' . $image . '">
@@ -491,7 +491,7 @@
                                         <!-- Product Content Start -->
                                         <div class="pro-content">
                                             <div class="pro-info">
-                                                <h4><a href="' . $linksp . '">' . $value['name'] . '</a></h4>
+                                                <h4><a href="' . $linksp . '">' . $name . '</a></h4>
                                                 <p><span class="special-price">' . $price . '</span></p>
                                                 <div class="product-rating">
                                                     <i class="fa fa-star"></i>

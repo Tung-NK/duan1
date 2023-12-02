@@ -57,7 +57,6 @@ function chi_tiet_bill($bill)
 }
 
 
-
 function insert_bill($iduser, $name, $email, $diachi, $phone, $pttt, $ngaydathang, $tongdonhang)
 {
     $sql = "insert into bill(iduser,bill_name,bill_email,bill_diachi,bill_phone,bill_pttt,ngaydathang,total) 
@@ -75,8 +74,8 @@ function insert_cart($iduser, $idpro, $image, $name, $price, $soluong, $thanhtie
 function loadone_bill($id)
 {
     $sql = "select * from bill where id=" . $id;
-    $bill = pdo_query_one($sql);
-    return $bill;
+    $bill_ct = pdo_query_one($sql);
+    return $bill_ct;
 }
 
 function loadall_cart($idbill)
@@ -86,20 +85,13 @@ function loadall_cart($idbill)
     return $bill;
 }
 
+
 function loadall_cart_count($idbill)
 {
     $sql = "select * from cart where idbill=" . $idbill;
     $bill = pdo_query($sql);
     return sizeof($bill);
 }
-
-// function loadall_cart_product($idbill)
-// {
-//     $sql = "select * from cart where idbill=" . $idbill;
-//     $bill = pdo_query($sql);
-//     return $bill;
-// }
-
 
 
 function loadall_bill($iduser)
@@ -135,6 +127,23 @@ function get_ttdh($n)
     return $tt;
 }
 
+function get_tttt($a)
+{
+    switch ($a) {
+        case '1':
+            $tt = "";
+            break;
+        case '2':
+            $tt = "Đã thanh toán";
+            break;
+
+        default:
+           $tt= "";
+            break;
+    }
+    return $tt;
+}
+
 function load_trangthai()
 {
     $sql = "SELECT DISTINCT bill_trangthai FROM bill";
@@ -142,8 +151,24 @@ function load_trangthai()
     return $trangthai_bill;
 }
 
-function update_donhang($id, $bill_trangthai)
+function update_donhang($id, $bill_trangthai,$bill_tttt)
 {
-    $sql = "update bill set bill_trangthai= '" . $bill_trangthai . "' where id=" . $id;
+    $sql = "update bill set bill_trangthai= '" . $bill_trangthai . "', bill_tttt = '".$bill_tttt."' where id=" . $id;
     pdo_execute($sql);
 }
+
+function huydon($id){
+    $sql = "UPDATE bill SET huydon = 1 WHERE id =" .$id;
+    pdo_execute($sql);
+}
+
+function bohuydon($id){
+    $sql = "UPDATE bill SET huydon = 0 WHERE id =" .$id;
+    pdo_execute($sql);
+}
+
+function xnhuydon($id){
+    $sql = "UPDATE bill SET huydon = 2 WHERE id =" .$id;
+    pdo_execute($sql);
+}
+

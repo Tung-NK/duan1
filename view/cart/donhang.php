@@ -10,6 +10,8 @@
                     <th>Trạng thái</th>
                     <th>Tổng</th>
                     <th>Số lượng</th>
+                    <th>Chi tiết</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -20,30 +22,35 @@
                         $ttdh = get_ttdh($bill['bill_trangthai']);
                         $countsp = loadall_cart_count($bill['id']);
                         $ct = loadall_cart($bill['id']);
+                        $view = "index.php?act=viewbill&id=" . $id;
+                        $huydh = "index.php?act=huydh&id=" . $id;
+                        $bohuydh = "index.php?act=bohuydh&id=" . $id;
+                        $suaButton = ($bill['huydon'] == 0 || $bill['huydon'] == 1) ? '<a class="view" href="' . $view . '">view</a>' : 'Đã huỷ đơn';
+
                         echo '<tr>
-                                    <td>TVY-' . $bill['id'] . '</td>
-                                    <td>' . $bill['ngaydathang'] . '</td>
-                                    <td>' . $ttdh . '</td>
-                                    <td>' . $bill['total'] . '</td>
-                                    <td>' . $countsp . '</td>
-                                </tr>';
-                                
-                        if (is_array($ct)) {
-                            foreach ($ct as $item) {
-                                global $img_path;
-                                $hinh = $img_path .  $item['image'];
-                                echo '<tr>
-                                            <td>' . $item['idpro'] . '</td>
-                                            <td><img src="' . $hinh . '" style="width: 100px; height: auto;"></td>
-                                            <td>' . $item['name'] . '</td>
-                                            <td>' . $item['price'] . '</td>
-                                            <td>' . $item['soluong'] . '</td> 
-                                        </tr>';
+                                <td>TVY-' . $bill['id'] . '</td>
+                                <td>' . $bill['ngaydathang'] . '</td>
+                                <td>' . $ttdh . '</td>
+                                <td>' . $bill['total'] . '</td>
+                                <td>' . $countsp . '</td>
+                                <td>' . $suaButton . '</td>
+                            <td>';
+
+                            if ($bill['huydon'] == 0 && $ttdh == 'Chờ xác nhận') {
+                                echo '<a class="view" href="' . $huydh . '">huỷ đơn</a>';
+                            } else if ($bill['huydon'] == 1 && $ttdh == 'Chờ xác nhận') {
+                                echo 'Chờ xác nhận' . '<a class="view" href="' . $bohuydh . '">Bỏ huỷ đơn</a>'; 
+                            }else {
+                                echo '';
                             }
-                        }
+                    
+                            echo '</td></tr>';
                     }
                 }
                 ?>
+
+
+
             </tbody>
         </table>
     </div>

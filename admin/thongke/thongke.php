@@ -1,6 +1,6 @@
 <div class="row">
             <div class="row titleAdmin">
-                <h2>Biểu đồ thống kê</h2>
+                <!-- <h2>Biểu đồ thống kê</h2> -->
             </div>
            <div class="row formcontent">
            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -20,7 +20,7 @@
                       foreach ($listthongke as $thongke) {
                         extract($thongke);
                         if($i==$tongdm) $a=""; else $a=",";
-                        echo"['".$thongke['tendm']."', '".$thongke['countsp']."']".$a;
+                        echo"['".$thongke['tensp']."', '".$thongke['soluong']."']".$a;
                       }
                   $i+=1;    
                   ?>
@@ -33,7 +33,7 @@
         ]);
 
         var materialOptions = {
-          width: 900,
+          width: 1200,
           // chart: {
           //   title: 'Nearby galaxies',
           //   subtitle: 'distance on the left, brightness on the right'
@@ -84,7 +84,7 @@
   </head>
   <body>
     <br><br>
-    <div id="chart_div" style="width: 800px; height: 500px; "></div>
+    <div id="chart_div" style="width: 600px; height: 500px; "></div>
   </body>      
 
            </div>

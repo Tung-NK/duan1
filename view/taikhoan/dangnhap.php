@@ -20,7 +20,7 @@
                         <div class="form-group row">
                             <label for="user" class="col-sm-3 col-form-label">User</label>
                             <div class="col-sm-7">
-                                <input type="text" name="user" class="form-control" id="user" placeholder="User">
+                                <input type="text" name="email" class="form-control" id="user" placeholder="Email">
                             </div>
                         </div>
                         <div class="form-group row">

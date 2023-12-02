@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include '../model/pdo.php';
 include 'header.php';
 include '../model/danhmuc.php';
@@ -39,6 +40,17 @@ if (isset($_GET['act'])) {
                 $dm = loadone_danhmuc($_GET['id']);
             }
             include 'danhmuc/updatedm.php';
+            break;
+
+            case 'updatedm';
+            if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $dm=update_danhmuc($id, $name);
+                $thongbao = "Cập nhật thành công";
+            }
+            $listdanhmuc = loadall_danhmuc();
+            include 'danhmuc/listdm.php';
             break;
 
         case 'listsp':
@@ -168,13 +180,21 @@ if (isset($_GET['act'])) {
             if (isset($_POST['capnhatdh']) && ($_POST['capnhatdh'])) {
                 $id = $_POST['id'];
                 $bill_trangthai = $_POST['bill_trangthai'];
-                update_donhang($id, $bill_trangthai);
+                $bill_tttt = $_POST['bill_tttt'];
+                update_donhang($id, $bill_trangthai,$bill_tttt);
                 $thongbao = "Cập nhật thành công";
             }
             $bill_list = loadall_bill(0);
             include 'donhang/listdh.php';
             break;
 
+        case 'xnhuy':
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    xnhuydon($id);
+                }
+                header('Location: index.php?act=listdh');
+                break;
             // bình luận    
         case 'binhluan':
             $listbinhluan = list_binhluan();
@@ -191,12 +211,14 @@ if (isset($_GET['act'])) {
 
             //thong kê
             case 'thongke':
-                $listthongke=loadall_thongke();
+                $thongke_data=loadall_thongke();
+                $lowest_sold_product = getLowestSoldProduct();
                 include 'thongke/listtk.php';
                 break;
 
             case 'bieudo':
                 $listthongke=loadall_thongke();
+                $lowest_sold_product = getLowestSoldProduct();
                 include 'thongke/thongke.php';
                 break;  
 
@@ -211,3 +233,4 @@ if (isset($_GET['act'])) {
 
 
 include 'footer.php';
+ob_end_flush();

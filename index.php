@@ -22,6 +22,30 @@ if (!isset($_SESSION['mycart'])) $_SESSION['mycart'] = [];
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
+        case 'bohuydh':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                bohuydon($id);
+            }
+            header('Location: index.php?act=mybill');
+            break;
+
+        case 'huydh':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                huydon($id);
+            }
+            header('Location: index.php?act=mybill');
+            break;
+
+        case 'viewbill':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $idbill = $_GET['id'];
+                $bill_ct = loadone_bill($_GET['id']);
+            }
+            include 'view/cart/donhangct.php';
+            break;
+
         case 'mybill':
             $bill_list = loadall_bill($_SESSION['user']['id']);
             include 'view/cart/donhang.php';
@@ -42,18 +66,14 @@ if (isset($_GET['act'])) {
                 $pttt = $_POST['pttt'];
                 $ngaydathang = date("Y-m-d H:i:s");
                 $tongdonhang = tongdonhang();
-
                 $idbill = insert_bill($iduser, $name, $email, $diachi, $phone, $pttt, $ngaydathang, $tongdonhang);
-
                 foreach ($_SESSION['mycart'] as $cart) {
                     insert_cart($_SESSION['user']['id'], $cart['0'], $cart['1'], $cart['2'], $cart['3'], $cart['4'], $cart['5'], $idbill);
                 }
-
-                $_SESSION['cart'] = [];
+                unset($_SESSION['mycart']);
             }
             $listbill =  loadone_bill($idbill);
             $bill =  loadall_cart($idbill);
-
             include 'view/cart/bill.php';
             break;
 
@@ -63,7 +83,7 @@ if (isset($_GET['act'])) {
             include 'view/cart/viewcart.php';
             break;
 
-        case 'addtocart';
+        case 'addtocart':
             if (isset($_POST['addtocart']) && ($_POST['addtocart'])) {
                 $id = $_POST['id'];
                 $name = $_POST['name'];
@@ -71,11 +91,26 @@ if (isset($_GET['act'])) {
                 $price = $_POST['price'];
                 $soluong = 1;
                 $ttien = $price * $soluong;
-                $spadd = [$id, $image, $name, $price, $soluong, $ttien];
-                array_push($_SESSION['mycart'], $spadd);
+
+
+                $productExists = false;
+                foreach ($_SESSION['mycart'] as $key => $cart) {
+                    if ($cart[0] == $id) {
+                        $_SESSION['mycart'][$key][4] += 1;
+                        $_SESSION['mycart'][$key][5] = $_SESSION['mycart'][$key][3] * $_SESSION['mycart'][$key][4];
+                        $productExists = true;
+                        break;
+                    }
+                }
+
+                if (!$productExists) {
+                    $spadd = [$id, $image, $name, $price, $soluong, $ttien];
+                    array_push($_SESSION['mycart'], $spadd);
+                }
             }
-            include 'view/cart/viewcart.php';
+            header('location: index.php?act=viewcart');
             break;
+
 
         case 'delcart':
             if (isset($_POST['idcart'])) {
@@ -85,6 +120,7 @@ if (isset($_GET['act'])) {
             }
             header('location: index.php?act=viewcart');
             break;
+
         case 'viewcart':
             include "view/cart/viewcart.php";
             break;
@@ -104,9 +140,10 @@ if (isset($_GET['act'])) {
 
         case 'dangnhap':
             if (isset($_POST['dangnhap']) && ($_POST['dangnhap'])) {
-                $user = $_POST['user'];
+                // $user = $_POST['user'];
+                $email = $_POST['email'];
                 $pass = $_POST['pass'];
-                $check_user = check_user($user, $pass);
+                $check_user = check_user($email, $pass);
                 if (is_array($check_user)) {
                     $_SESSION['user'] = $check_user;
                     $thongbao = "bạn đã đăng nhập tahnfh công";
@@ -174,7 +211,7 @@ if (isset($_GET['act'])) {
                 include 'view/home.php';
             }
             break;
-            
+
         default:
             include 'view/home.php';
             break;

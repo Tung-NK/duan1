@@ -12,20 +12,52 @@ if (is_array($donhang)) {
             <label class="col-md-2 text-center m-t-15">Trạng thái</label>
             <div class="col-md-9 ">
                 <select name="bill_trangthai" value="<?= $bill_trangthai ?>" class="select2 form-control custom-select" style="width: 100%; height:36px;">
-                    <option value="0">Chờ xác nhận</option>
-                    <option value="1">Đang chuẩn bị hàng</option>
-                    <option value="2">Đang giao hàng</option>
-                    <option value="3">Đã giao hàng</option>
+                    <?php if ($bill_trangthai == 0) : ?>
+                        <option value="0" selected>Chờ xác nhận</option>
+                        <option value="1">Đang chuẩn bị hàng</option>
+                        <option value="2">Đang giao hàng</option>
+                        <option value="3">Đã giao hàng</option>
+                    <?php elseif ($bill_trangthai == 1) : ?>
+                        <option value="1" selected>Đang chuẩn bị hàng</option>
+                        <option value="2">Đang giao hàng</option>
+                        <option value="3">Đã giao hàng</option>
+                    <?php elseif ($bill_trangthai == 2) : ?>
+                        <option value="2" selected>Đang giao hàng</option>
+                        <option value="3">Đã giao hàng</option>
+                    <?php else : ?>
+                        <option value="3" selected>Đã giao hàng</option>
+                    <?php endif; ?>
                 </select>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="fname" class="col-sm-2 text-center control-label col-form-label">ID</label>
-            <div class="col-sm-9">
-                <input type="text" name="id" class="form-control" id="fname" placeholder="User" value="<?= $id ?>" readonly>
+            <label class="col-md-2 text-center m-t-15">Trạng thái thanh toán</label>
+            <div class="col-md-9">
+                <select name="bill_tttt" value="<?= $pttt ?>" class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                    <?php
+                    extract($donhang);
+                    $pttt = $donhang['bill_pttt'];
+                    $ptthanhtoan = ($pttt == 1) ? 'Thanh toán khi nhận hàng' : (($pttt == 2) ? 'Thanh toán bằng thẻ' : '');
+                    ?>
+                    <?php if ($pttt == 1) : ?>
+                        <option>1<span>. Chưa thanh toán</span></option>
+                        <option>2<span>. Đã thanh toán</span></option>
+                    <?php else : ?>
+                        <option selected>2<span <?php if ($pttt == 2) echo 'readonly'; ?>>. Đã thanh toán</span></option>
+                    <?php endif; ?>
+                </select>
             </div>
         </div>
+
+
+        <div class="form-group row">
+            <label for="id" class="col-sm-2 text-center control-label col-form-label">ID</label>
+            <div class="col-sm-9">
+                <input type="text" name="id" class="form-control" id="user_id" placeholder="User" value="<?= $id ?>" readonly>
+            </div>
+        </div>
+
 
         <div class="form-group row">
             <label for="lname" class="col-sm-2 text-center control-label col-form-label">Khách hàng</label>
@@ -60,8 +92,7 @@ if (is_array($donhang)) {
             <?php
             extract($donhang);
             $pttt = $donhang['bill_pttt'];
-            $ptthanhtoan = ($pttt == 1) ? 'Thanh toán khi nhận hàng' : (($pttt == 2) ? 'Thanh toán bằng thẻ' :
-                'Phương thức khác');
+            $ptthanhtoan = ($pttt == 1) ? 'Thanh toán khi nhận hàng' : (($pttt == 2) ? 'Thanh toán bằng thẻ' : '');
             echo '<label for="lname" class="col-sm-2 text-center control-label col-form-label">Phương thức thanh toán</label>
             <div class="col-sm-9">
                 <input type="text" name="bill_pttt" class="form-control" id="lname" placeholder="Phương thức thanh toán" value="' . $ptthanhtoan . '" readonly>
