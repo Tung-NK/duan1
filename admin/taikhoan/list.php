@@ -19,6 +19,7 @@
             extract($tk);
             $suatk = "index.php?act=suatk&id=".$id;
             $xoatk = "index.php?act=xoatk&id=".$id;
+            $rol = ($role == 1) ? 'Admin' : 'User';
             echo '<tbody>
                 <tr>
                     <th scope="row">' . $id . '</th>
@@ -26,7 +27,7 @@
                     <td>' . $image . '</td>
                     <td>' . $email . '</td>
                     <td>' . $phone . '</td>
-                    <td>' . $role . '</td>
+                    <td>' . $rol . '</td>
                     <td>
                     <a href="' . $suatk . '"><input type="button" class="btn btn-primary" value="Sửa"></a>
                     <a href="' . $xoatk . '"><input type="button" class="btn btn-primary" value="Xoá"></a>

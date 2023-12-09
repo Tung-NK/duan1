@@ -127,8 +127,8 @@
                         </div>
 
 
-
-
+                        
+                        
                         <!-- Cart Box End Here -->
 
                     </div>
@@ -146,7 +146,7 @@
                                         <!-- Home Version Dropdown Start -->
                                         <!-- Home Version Dropdown End -->
                                     </li>
-                                    <li><a href="">Màn hình</a></li>
+                                    <li><a href="">Màn hình</a></li>    
                                     <li><a href="shop.html">Chuột</a></li>
                                     <li><a href="shop.html">Tai nghe</a></li>
                                     <li><a href="shop.html">Vỏ case</a></li>
@@ -208,7 +208,7 @@
                         <!-- Menu Area End Here -->
                         <!-- Cart Box Start Here -->
                         <?php
-                        if (isset($_SESSION['user'])) {
+                        if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                             extract($_SESSION['user']);
                         ?>
                             <div class="col-lg-2">

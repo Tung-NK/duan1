@@ -18,36 +18,34 @@
                         <div class="register-form login-form clearfix">
                             <form action="index.php?act=dangki" method="post">
                                 <p>Bạn đã có tài khoản? <a href="index.php?act=dangnhap">Đăng nhập ngay!</a></p>
-                                <!-- <div class="form-group row align-items-center">
-                                    <label class="col-lg-3 col-md-3 col-form-label">Social title</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <span class="custom-radio"><input name="id_gender" value="1" type="radio"> Mr.</span>
-                                        <span class="custom-radio"><input name="id_gender" value="1" type="radio"> Mrs.</span>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="form-group row">
-                                    <label for="f-name" class="col-lg-3 col-md-3 col-form-label">First Name</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="text" class="form-control" id="f-name">
-                                    </div>
-                                </div> -->
                                 <div class="form-group row">
                                     <label for="l-name" class="col-lg-3 col-md-3 col-form-label">User Name</label>
                                     <div class="col-lg-6 col-md-6">
                                         <input type="text" name="user" class="form-control" id="l-name">
+                                        <?php if (isset($errors['user'])) : ?>
+                                            <span class="text-danger"><?= $errors['user'] ?></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <label for="email" class="col-lg-3 col-md-3 col-form-label">Email</label>
                                     <div class="col-lg-6 col-md-6">
                                         <input type="text" name="email" class="form-control" id="email">
+                                        <?php if (isset($errors['email'])) : ?>
+                                            <span class="text-danger"><?= $errors['email'] ?></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group row">
                                     <label for="inputPassword" class="col-lg-3 col-md-3 col-form-label">Password</label>
                                     <div class="col-lg-6 col-md-6">
                                         <input type="password" name="pass" class="form-control" id="inputPassword">
                                         <button class="btn show-btn" type="button">Show</button>
+                                        <?php if (isset($errors['pass'])) : ?>
+                                            <span class="text-danger"><?= $errors['pass'] ?></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 
@@ -72,9 +70,9 @@
                             </form>
 
                             <?php
-                                if(isset($thongbao)&&($thongbao != "")){
-                                    echo $thongbao;
-                                }
+                            if (isset($thongbao) && ($thongbao != "")) {
+                                echo $thongbao;
+                            }
                             ?>
                         </div>
                     </div>

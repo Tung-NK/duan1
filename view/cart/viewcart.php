@@ -64,7 +64,7 @@
                                 <!-- Cart Button Start -->
                                 <div class="col-md-8 col-sm-12">
                                     <div class="buttons-cart">
-                                        <input type="submit" value="Update Cart" />
+                                        <!-- <input type="submit" value="Update Cart" /> -->
                                         <a href="index.php">Continue Shopping</a>
                                     </div>
                                 </div>

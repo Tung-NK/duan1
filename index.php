@@ -57,25 +57,59 @@ if (isset($_GET['act'])) {
 
         case 'bill':
             if (isset($_POST['bill']) && ($_POST['bill'])) {
-                if (isset($_SESSION['user'])) $iduser = $_SESSION['user']['id'];
-                else $id = 0;
+                $iduser = isset($_SESSION['user']) ? $_SESSION['user']['id'] : 0;
                 $name = $_POST['user'];
                 $email = $_POST['email'];
                 $diachi = $_POST['diachi'];
                 $phone = $_POST['phone'];
-                $pttt = $_POST['pttt'];
+                $pttt = isset($_POST['pttt']) ? $_POST['pttt'] : '';
                 $ngaydathang = date("Y-m-d H:i:s");
                 $tongdonhang = tongdonhang();
+
+                $errors = []; 
+
+                if (empty($name)) {
+                    $errors['name'] = "<span style='color:red;'>Vui lòng nhập tên</span>";
+                }
+
+                if (empty($email)) {
+                    $errors['email'] = "<span style='color:red;'>Vui lòng nhập email</span>";
+                } elseif (!preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+                    $errors['email'] = "<span style='color:red;'>Email không hợp lệ</span>";
+                }
+
+                if (empty($diachi)) {
+                    $errors['diachi'] = "<span style='color:red;'>Vui lòng nhập địa chỉ</span>";
+                }
+
+                if (empty($phone)) {
+                    $errors['phone'] = "<span style='color:red;'>Vui lòng nhập số điện thoại</span>";
+                } elseif (!preg_match("/^[0-9]{10,11}$/", $phone)) {
+                    $errors['phone'] = "<span style='color:red;'>Số điện thoại không hợp lệ</span>";
+                }
+
+                if (empty($pttt)) {
+                    $errors['pttt'] = "<span style='color:red;'>Vui lòng chọn phương thức thanh toán</span>";
+                }
+
+                // Kiểm tra nếu có lỗi, hiển thị thông báo lỗi và kết thúc
+                if (!empty($errors)) {
+                    include 'view/cart/thanhtoan.php'; // Đưa thông tin lỗi đến view để hiển thị
+                    exit(); 
+                }
+
                 $idbill = insert_bill($iduser, $name, $email, $diachi, $phone, $pttt, $ngaydathang, $tongdonhang);
                 foreach ($_SESSION['mycart'] as $cart) {
                     insert_cart($_SESSION['user']['id'], $cart['0'], $cart['1'], $cart['2'], $cart['3'], $cart['4'], $cart['5'], $idbill);
                 }
                 unset($_SESSION['mycart']);
+
+                $listbill = loadone_bill($idbill);
+                $bill = loadall_cart($idbill);
+                include 'view/cart/bill.php';
             }
-            $listbill =  loadone_bill($idbill);
-            $bill =  loadall_cart($idbill);
-            include 'view/cart/bill.php';
             break;
+
 
 
             //giỏ hàng
@@ -127,31 +161,71 @@ if (isset($_GET['act'])) {
 
             //tài khoản
         case 'dangki':
-            if (isset($_POST['dangki']) && ($_POST['dangki'])) {
-                $email = $_POST['email'];
-                $user = $_POST['user'];
-                $pass = $_POST['pass'];
-                insert_taikhoan($email, $user, $pass);
-                $thongbao = "Đã đăng kí thành công";
+            if (isset($_POST['dangki'])) {
+                $errors = array();
+
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $email = trim($_POST['email']);
+                    $user = trim($_POST['user']);
+                    $pass = trim($_POST['pass']);
+
+                    if (empty($email)) {
+                        $errors['email'] = "Vui lòng nhập Email.";
+                    }
+
+                    if (empty($user)) {
+                        $errors['user'] = "Vui lòng nhập User Name.";
+                    }
+
+                    if (empty($pass)) {
+                        $errors['pass'] = "Vui lòng nhập Password.";
+                    }
+
+                    if (!empty($email) && !preg_match('/^\S+@\S+\.\S+$/', $email)) {
+                        $errors['email'] = "Email không hợp lệ.";
+                    }
+
+                    if (!empty($pass) && (strlen($pass) < 3 || !preg_match('/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/', $pass))) {
+                        $errors['pass'] = "Mật khẩu cần ít nhất 3 ký tự hoặc số.";
+                    }
+
+                    if (empty($errors)) {
+                        insert_taikhoan($email, $user, $pass);
+                        $thongbao = "Đã đăng ký thành công.";
+                    }
+                }
             }
 
             include 'view/taikhoan/dangki.php';
             break;
 
+
         case 'dangnhap':
             if (isset($_POST['dangnhap']) && ($_POST['dangnhap'])) {
-                // $user = $_POST['user'];
                 $email = $_POST['email'];
                 $pass = $_POST['pass'];
-                $check_user = check_user($email, $pass);
-                if (is_array($check_user)) {
-                    $_SESSION['user'] = $check_user;
-                    $thongbao = "bạn đã đăng nhập tahnfh công";
-                    header('location: index.php');
+
+                if (!empty($email) && !preg_match('/^\S+@\S+\.\S+$/', $email)) {
+                    $thongbao = "<span style='color:red;'>Vui đúng định dạng</span>";
+                }
+
+                if (empty($email) || empty($pass)) {
+                    $thongbao = "<span style='color:red;'>Vui lòng nhập dữ liệu</span>";
+                } else {
+                    $check_user = check_user($email, $pass);
+
+                    if (is_array($check_user)) {
+                        $_SESSION['user'] = $check_user;
+                        $thongbao = "Bạn đã đăng nhập thành công.";
+                        header('location: index.php');
+                    } else {
+                        $tbchung = "<span style='color:red;'>Email hoặc mật khẩu không chính xác</span>";
+                    }
                 }
             }
             include 'view/taikhoan/dangnhap.php';
             break;
+
 
         case 'thoat':
             session_unset();
@@ -164,13 +238,41 @@ if (isset($_GET['act'])) {
                 $pass = $_POST['pass'];
                 $phone = $_POST['phone'];
                 $id = $_POST['id'];
+                $email = $_POST['email'];
 
-                update_taikhoan($id, $user, $pass, $email, $phone);
-                $_SESSION['user'] = check_user($user, $pass);
-                header('location: index.php?act=edit_tk');
+                $errors = array();
+                if (empty($user)) {
+                    $errors['user'] = "Vui lòng điền đầy đủ tên";
+                }
+
+                if (empty($email)) {
+                    $errors['email'] = "Vui lòng điền đầy đủ Email";
+                } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $errors['email'] = "Email không hợp lệ";
+                }
+
+                if (empty($pass)) {
+                    $errors['pass'] = "Vui lòng điền đầy đủ Password";
+                }
+
+                if (empty($phone)) {
+                    $errors['phone'] = "Vui lòng điền đầy đủ Số điện thoại";
+                } else if (!preg_match('/^\d+$/', $phone)) {
+                    $errors['phone'] = "Số điện thoại chỉ chứa các ký tự số";
+                }
+
+                if (empty($errors)) {
+                    update_taikhoan($id, $user, $pass, $email, $phone);
+                    $_SESSION['user'] = check_user($email, $pass);
+                    include 'view/taikhoan/edit_tk.php';
+                } else {
+                    include 'view/taikhoan/edit_tk.php';
+                }
+            } else {
+                include 'view/taikhoan/edit_tk.php';
             }
-            include 'view/taikhoan/edit_tk.php';
             break;
+
 
         case 'quenmk':
             if (isset($_POST['guiemail'])) {

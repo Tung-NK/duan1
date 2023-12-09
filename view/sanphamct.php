@@ -37,7 +37,7 @@
     }
 
     .boxfooter input[type="submit"]:hover {
-        background-color:  #0438A1;
+        background-color: #0438A1;
         color: white;
     }
 
@@ -132,29 +132,13 @@
                             <option>L</option>
                         </select> -->
                     </div> 
-                    <div class="color clearfix mb-30">
-                        <label>color</label>
-                        <ul class="color-list">
-                            <li>
-                                <a class="black" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="white" href="#"></a>
-                            </li>
-                            <li class="active">
-                                <a class="orange" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="paste" href="#"></a>
-                            </li>
-                        </ul>
-                    </div>
+                    
                     <div class="quatity-stock">
                         <label>Quantity</label>
                         <ul class="d-flex flex-wrap">
                             <li class="box-quantity">
                                 <form action="#">
-                                    <input class="quantity" type="number" min="1" value="1">
+                                    <input class="quantity" type="number" min="1" max="1" value="1">
                                 </form>
                             </li>
                             <li>
@@ -288,7 +272,13 @@
                            </div>
                        </div>
                        <div class="pro-add-cart">
-                           <a href="cart.html" title="Add to Cart">Add To Cart</a>
+                        <form action="index.php?act=addtocart" method="post">
+                                <input type="hidden" name="id" value="' . $id . '">
+                                <input type="hidden" name="name" value="' . $name . '">
+                                <input type="hidden" name="image" value="' . $image . '">
+                                <input type="hidden" name="price" value="' . $sp_cung_loai['price'] . '">
+                                <a><input type="submit" name="addtocart" value="Thêm vào giỏ hàng"></a>
+                            </form>
                        </div>
                    </div>
                    <!-- Product Content End -->

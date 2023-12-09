@@ -16,17 +16,16 @@
              <div class="dashboard-upper-info">
                  <div class="row align-items-center no-gutters">
                      <div class="col-xl-3 col-lg-3 col-md-6">
-                     <?php
-                        if (isset($_SESSION['user'])) {
-                            extract($_SESSION['user']);
-
-                            echo '<div class="d-single-info">
-                             <p class="user-name">Hello <strong>'.$email.'</strong></p>
+                         <?php
+                            if (isset($_SESSION['user']) && (is_array($_SESSION['user']))) {
+                                extract($_SESSION['user']);
+                                echo '<div class="d-single-info">
+                             <p class="user-name">Hello <strong>' . $email . '</strong></p>
                              <p><a class="log-out" href="index.php?act=thoat">Log Out</a></p>
                          </div>';
-                        }
-                        ?>
-                         
+                            }
+                            ?>
+
                      </div>
                      <div class="col-xl-3 col-lg-4 col-md-6">
                          <div class="d-single-info">
@@ -40,10 +39,10 @@
                              <p>support@example.com</p>
                          </div>
                      </div>
-                      
+
                      <div class="col-xl-3 col-lg-2 col-md-6">
                          <div class="d-single-info text-lg-center">
-                             <a class="view-cart" href="cart.html">view cart</a>
+                             <a class="view-cart" href="index.php?act=viewcart">view cart</a>
                          </div>
                      </div>
                  </div>
@@ -78,28 +77,28 @@
                                              <th>Ngày đặt hàng</th>
                                              <th>Trạng thái</th>
                                              <th>Tổng</th>
-                                             <th>Actions</th>
+                                             <th>Số lượng</th>
                                          </tr>
                                      </thead>
                                      <tbody>
 
-                                        <?php
-                                            if(is_array($bill_list)){
+                                         <?php
+                                            if (isset($bill_list) && is_array($bill_list)) {
                                                 foreach ($bill_list as $bill) {
                                                     extract($bill);
                                                     $ttdh = get_ttdh($bill['bill_trangthai']);
-                                                    $countsp =loadall_cart_count($bill['id']);
+                                                    $countsp = loadall_cart_count($bill['id']);
                                                     echo '<tr>
-                                                    <td>TVY-'.$bill['id'].'</td>
-                                                    <td>'.$bill['ngaydathang'].'</td>
-                                                    <td>'.$ttdh.'</td>
-                                                    <td>'.$bill['total'].'</td>
-                                                    <td>'.$countsp.'</td>
+                                                    <td>TVY-' . $bill['id'] . '</td>
+                                                    <td>' . $bill['ngaydathang'] . '</td>
+                                                    <td>' . $ttdh . '</td>
+                                                    <td>' . $bill['total'] . '</td>
+                                                    <td>' . $countsp . '</td>
                                                 </tr>';
                                                 }
                                             }
-                                        ?>
-                                         
+                                            ?>
+
                                      </tbody>
                                  </table>
                              </div>
@@ -143,69 +142,72 @@
                          <div id="account-details" class="tab-pane fade">
                              <h3>Thay đổi thông tin tài khoản </h3>
                              <div class="register-form login-form clearfix">
-                                <?php
-                                    if(isset($_SESSION['user'])&&(is_array($_SESSION['user']))){
+                                 <?php
+                                    if (isset($_SESSION['user']) && (is_array($_SESSION['user']))) {
                                         extract($_SESSION['user']);
                                     }
-                                ?>
-                             <form action="index.php?act=edit_tk" method="post">
-                                <!-- <div class="form-group row align-items-center">
-                                    <label class="col-lg-3 col-md-3 col-form-label">Social title</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <span class="custom-radio"><input name="id_gender" value="1" type="radio"> Mr.</span>
-                                        <span class="custom-radio"><input name="id_gender" value="1" type="radio"> Mrs.</span>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="form-group row">
-                                    <label for="f-name" class="col-lg-3 col-md-3 col-form-label">First Name</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="text" class="form-control" id="f-name">
-                                    </div>
-                                </div> -->
-                                <div class="form-group row">
-                                    <label for="l-name" class="col-lg-3 col-md-3 col-form-label">User Name</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="text" name="user" class="form-control" id="l-name" value="<?=$user?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="email" class="col-lg-3 col-md-3 col-form-label">Email</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="text" name="email" class="form-control" id="email" value="<?=$email?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="inputPassword" class="col-lg-3 col-md-3 col-form-label">Password</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="text" name="pass" class="form-control" id="inputPassword" value="<?=$pass?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="email" class="col-lg-3 col-md-3 col-form-label">Tel</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="text" name="phone" class="form-control" id="phone" value="<?=$phone?>">
-                                    </div>
-                                </div>
-                                <div class="form-check row p-0 mt-20">
-                                    <div class="col-md-6 offset-md-3">
-                                        <input class="form-check-input" value="#" id="offer" type="checkbox">
-                                        <label class="form-check-label" for="offer">Receive offers from our partners</label>
-                                    </div>
-                                </div>
-                                <div class="form-check row p-0 mt-20">
-                                    <div class="col-md-8 offset-md-3">
-                                        <input class="form-check-input" value="#" id="subscribe" type="checkbox">
-                                        <label class="form-check-label" for="subscribe">Sign up for our newsletter<br>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers..</label>
-                                    </div>
-                                </div>
-                                <div class="register-box mt-40">
-                                    <input type="hidden" name="id" value="<?=$id?>">
-                                    <input type="submit" name="capnhat" class="login-btn float-right" value="Save"></input>
-                                </div>
-                                <div class="register-box mt-40">
-                                    <input type="reset" class="login-btn float-right" value="Nhập lại"></input>
-                                </div>
-                            </form>
+                                    ?>
+                                 <form action="index.php?act=edit_tk" method="post">
+                                     <div class="form-group row">
+                                         <label for="l-name" class="col-lg-3 col-md-3 col-form-label">User Name</label>
+                                         <div class="col-lg-6 col-md-6">
+                                             <input type="text" name="user" class="form-control" id="l-name" value="<?= $user ?>">
+                                             <?php if (isset($errors['user'])) : ?>
+                                                 <span class="text-danger"><?= $errors['user']; ?></span>
+                                             <?php endif; ?>
+                                         </div>
+                                     </div>
+
+                                     <div class="form-group row">
+                                         <label for="email" class="col-lg-3 col-md-3 col-form-label">Email</label>
+                                         <div class="col-lg-6 col-md-6">
+                                             <input type="text" name="email" class="form-control" id="email" value="<?= $email ?>">
+                                             <?php if (isset($errors['email'])) : ?>
+                                                 <span class="text-danger"><?= $errors['email']; ?></span>
+                                             <?php endif; ?>
+                                         </div>
+                                     </div>
+
+                                     <div class="form-group row">
+                                         <label for="inputPassword" class="col-lg-3 col-md-3 col-form-label">Password</label>
+                                         <div class="col-lg-6 col-md-6">
+                                             <input type="text" name="pass" class="form-control" id="inputPassword" value="<?= $pass ?>">
+                                             <?php if (isset($errors['pass'])) : ?>
+                                                 <span class="text-danger"><?= $errors['pass']; ?></span>
+                                             <?php endif; ?>
+                                         </div>
+                                     </div>
+
+                                     <div class="form-group row">
+                                         <label for="email" class="col-lg-3 col-md-3 col-form-label">Tel</label>
+                                         <div class="col-lg-6 col-md-6">
+                                             <input type="text" name="phone" class="form-control" id="phone" value="<?= $phone ?>">
+                                             <?php if (isset($errors['phone'])) : ?>
+                                                 <span class="text-danger"><?= $errors['phone']; ?></span>
+                                             <?php endif; ?>
+                                         </div>
+                                     </div>
+
+                                     <div class="form-check row p-0 mt-20">
+                                         <div class="col-md-6 offset-md-3">
+                                             <input class="form-check-input" value="#" id="offer" type="checkbox">
+                                             <label class="form-check-label" for="offer">Receive offers from our partners</label>
+                                         </div>
+                                     </div>
+                                     <div class="form-check row p-0 mt-20">
+                                         <div class="col-md-8 offset-md-3">
+                                             <input class="form-check-input" value="#" id="subscribe" type="checkbox">
+                                             <label class="form-check-label" for="subscribe">Sign up for our newsletter<br>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers..</label>
+                                         </div>
+                                     </div>
+                                     <div class="register-box mt-40">
+                                         <input type="hidden" name="id" value="<?= $id ?>">
+                                         <input type="submit" name="capnhat" class="login-btn float-right" value="Save"></input>
+                                     </div>
+                                     <div class="register-box mt-40">
+                                         <input type="reset" class="login-btn float-right" value="Nhập lại"></input>
+                                     </div>
+                                 </form>
                              </div>
                          </div>
                      </div>

@@ -101,6 +101,9 @@
                                 <div class="checkout-form-list mb-30">
                                     <label>Tên người nhận <span class="required">*</span></label>
                                     <input name="user" value="<?= $name ?>" type="text" placeholder="" />
+                                    <?php if (isset($errors['name'])) { ?>
+                                        <span class="error"><?php echo $errors['name']; ?></span>
+                                    <?php } ?>
                                 </div>
                             </div>
 
@@ -108,6 +111,9 @@
                                 <div class="checkout-form-list">
                                     <label>Địa chỉ <span class="required">*</span></label>
                                     <input name="diachi" value="<?= $diachi ?>" type="text" placeholder="Tên đường" />
+                                    <?php if (isset($errors['diachi'])) { ?>
+                                        <span class="error"><?php echo $errors['diachi']; ?></span>
+                                    <?php } ?>
                                 </div>
                             </div>
 
@@ -116,12 +122,18 @@
                                 <div class="checkout-form-list mb-30">
                                     <label>Email<span class="required">*</span></label>
                                     <input name="email" value="<?= $email ?>" type="email" placeholder="Email" />
+                                    <?php if (isset($errors['email'])) { ?>
+                                        <span class="error"><?php echo $errors['email']; ?></span>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="checkout-form-list mb-30">
                                     <label>Phone <span class="required">*</span></label>
                                     <input name="phone" value="<?= $phone ?>" type="text" placeholder="Phone" />
+                                    <?php if (isset($errors['phone'])) { ?>
+                                        <span class="error"><?php echo $errors['phone']; ?></span>
+                                    <?php } ?>
                                 </div>
                             </div>
 
@@ -214,6 +226,10 @@
                                         <p>MB Bank</p>
                                     </div>
                                 </div>
+
+                                <?php if (isset($errors['pttt'])) { ?>
+                                    <span class="error"><?php echo $errors['pttt']; ?></span>
+                                <?php } ?>
                             </div>
 
 
